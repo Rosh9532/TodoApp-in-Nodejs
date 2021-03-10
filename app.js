@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static("public"));
 
 
-mongoose.connect(`mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO_DB_PASSWORD}@cluster0.gakvl.mongodb.net/${process.env.MONGO_DB_DATABASE}?retryWrites=true&w=majority`, {
+mongoose.connect(`${process.env.MONGO_URI}`, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true
@@ -145,6 +145,7 @@ app.post("/delete",function(request,response){
 
 
 
-app.listen(process.env.PORT,()=>{
-    console.log(`Server is running on port ${process.env.PORT}`);
-});
+app.listen(
+    process.env.PORT || 3000, 
+    console.log("Server started")
+);
